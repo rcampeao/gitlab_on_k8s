@@ -1,0 +1,13 @@
+{{- if .Values.enabled -}}
+{{- if .Values.udp }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+{{ include "gitlab.standardLabels" . | indent 4 }}
+    component: "{{ .Values.controller.name }}"
+  name: {{ template "nginx-ingress.fullname" . }}-udp
+data:
+{{ toYaml .Values.udp | indent 2 }}
+{{- end }}
+{{- end }}
